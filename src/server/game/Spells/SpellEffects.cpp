@@ -3225,12 +3225,18 @@ void Spell::EffectSummonPet(SpellEffIndex effIndex)
     if (!pet)
         return;
 
+    // Set ReactState for summoned pets
     if (m_caster->IsCreature())
     {
         if (m_caster->ToCreature()->IsTotem())
             pet->SetReactState(REACT_AGGRESSIVE);
         else
             pet->SetReactState(REACT_DEFENSIVE);
+    }
+    else
+    {
+        // Player-summoned pets default to defensive (will auto-attack when player/pet is attacked)
+        pet->SetReactState(REACT_DEFENSIVE);
     }
 
     pet->SetUInt32Value(UNIT_CREATED_BY_SPELL, m_spellInfo->Id);

@@ -1174,6 +1174,20 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
 
                 switch (GetEntry())
                 {
+                    case NPC_IMP:
+                    case NPC_FELHUNTER:
+                    case NPC_VOIDWALKER:
+                    case NPC_SUCCUBUS:
+                    case NPC_FELGUARD:
+                        {
+                            AddAura(SPELL_PET_AVOIDANCE, this);
+                            AddAura(SPELL_WARLOCK_PET_SCALING_01, this);
+                            AddAura(SPELL_WARLOCK_PET_SCALING_02, this);
+                            AddAura(SPELL_WARLOCK_PET_SCALING_03, this);
+                            AddAura(SPELL_WARLOCK_PET_SCALING_04, this);
+                            AddAura(SPELL_WARLOCK_PET_SCALING_05, this);
+                            break;
+                        }
                     case NPC_WATER_ELEMENTAL_PERM:
                         {
                             AddAura(SPELL_PET_AVOIDANCE, this);
