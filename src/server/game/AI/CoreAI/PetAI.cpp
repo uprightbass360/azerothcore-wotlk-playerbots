@@ -450,6 +450,17 @@ void PetAI::OwnerAttackedBy(Unit* attacker)
     if (me->GetVictim() && me->GetVictim()->IsAlive())
         return;
 
+    // Set command attack flag so pet will actually engage the attacker
+    // Without this, CanAttack() returns false for many pet states (STAY, etc.)
+    if (me->GetCharmInfo())
+    {
+        me->GetCharmInfo()->SetIsCommandAttack(true);
+        me->GetCharmInfo()->SetIsAtStay(false);
+        me->GetCharmInfo()->SetIsFollowing(false);
+        me->GetCharmInfo()->SetIsCommandFollow(false);
+        me->GetCharmInfo()->SetIsReturning(false);
+    }
+
     // Continue to evaluate and attack if necessary
     AttackStart(attacker);
 }
@@ -470,6 +481,17 @@ void PetAI::OwnerAttacked(Unit* target)
     // Prevent pet from disengaging from current target
     if (me->GetVictim() && me->GetVictim()->IsAlive())
         return;
+
+    // Set command attack flag so pet will actually engage the target
+    // Without this, CanAttack() returns false for many pet states (STAY, etc.)
+    if (me->GetCharmInfo())
+    {
+        me->GetCharmInfo()->SetIsCommandAttack(true);
+        me->GetCharmInfo()->SetIsAtStay(false);
+        me->GetCharmInfo()->SetIsFollowing(false);
+        me->GetCharmInfo()->SetIsCommandFollow(false);
+        me->GetCharmInfo()->SetIsReturning(false);
+    }
 
     // Continue to evaluate and attack if necessary
     AttackStart(target);
@@ -816,6 +838,17 @@ void PetAI::AttackedBy(Unit* attacker)
     // Prevent pet from disengaging from current target
     if (me->GetVictim() && me->GetVictim()->IsAlive())
         return;
+
+    // Set command attack flag so pet will actually engage the attacker
+    // Without this, CanAttack() returns false for many pet states (STAY, etc.)
+    if (me->GetCharmInfo())
+    {
+        me->GetCharmInfo()->SetIsCommandAttack(true);
+        me->GetCharmInfo()->SetIsAtStay(false);
+        me->GetCharmInfo()->SetIsFollowing(false);
+        me->GetCharmInfo()->SetIsCommandFollow(false);
+        me->GetCharmInfo()->SetIsReturning(false);
+    }
 
     // Continue to evaluate and attack if necessary
     AttackStart(attacker);
